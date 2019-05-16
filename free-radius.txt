@@ -1,0 +1,48 @@
+### FREE RADIUS ###
+apt-cache search freeradius
+
+www.freeradius.org
+
+http://networkradius.com/doc/FreeRADIUS%20Technical%20Guide.pdf
+
+The above Ubuntu search returns the following packages:
+freeradius - a high-performance configurable RADIUS server
+freeradius-common - FreeRADIUS common files•freeradius-dbg - debug symbols for the FreeRADIUS packages
+libfreeradius-dev - FreeRADIUS shared library development files
+libfreeradius2 - FreeRADIUS shared library•freeradius-dialupadmin - set of PHP scripts for administering a FreeRADIUS server
+freeradius-iodbc - iODBC module for FreeRADIUS server
+freeradius-krb5 - kerberos module for FreeRADIUS server
+freeradius-ldap - LDAP module for FreeRADIUS server
+freeradius-mysql - MySQL module for FreeRADIUS server
+freeradius-postgresql - PostgreSQL module for FreeRADIUS server
+freeradius-utils - FreeRADIUS client utilities
+libfreeradius3 - FreeRADIUS shared library
+
+Configure Free-radius-Server on Kali Linux Part 1
+https://www.youtube.com/watch?v=wMdZiOHiNpA
+Configure Free-radius-Server on Kali Linux Part 2
+https://www.youtube.com/watch?v=ijyiN-urD7g
+
+radiusd --help
+radiusd -X
+
+/usr/local/etc/raddb - all configuration files
+
+vim users
+"bob"    Cleartext-Password := "password"
+            Reply-Message := "Hello, %{User-Name}"
+
+vim clients.conf
+client private-network-1 {
+       ipaddr          = 192.168.10.0/24
+       secret          = test123
+}   
+
+/etc/init.d/freeradius restart
+service radiusd start
+service radiusd stop
+service radiusd status
+
+on Cisco: 
+radius-server host 192.168.10.109 auth-port 1812 acct-port 1813 key test123
+aaa authentication dot1x default group radus
